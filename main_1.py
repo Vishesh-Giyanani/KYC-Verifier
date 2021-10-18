@@ -3,7 +3,7 @@ from tkinter import font
 from PIL import Image, ImageTk
 
 def home_button_press():
-    print("hello") 
+    print("hello")
  
 root = Tk()
 root.title("                                                                                                                                                                                                                 KYC Verifier")

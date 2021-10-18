@@ -1,54 +1,64 @@
-from os import name, mkdir, path
-import main_1
-import fitz 
-import details_landing 
-import qrcode
-from tkinter import *
-import time
-from typing import Sized
-from PIL import Image, ImageTk
-import cv2
-import PyPDF2
-from pdf2image import convert_from_path
+from os import times
+import tkinter as tk
 from tkinter.filedialog import askopenfile
+from PIL import Image, ImageTk
 
-#Test Declarations
-name = "Vishesh Bharat Giyanani"
-email = "giyananivishesh@gmail.com"
-contact = "7045643723"
-dob = "2003"
-residense = "Mumbai"
-pin = "400049"
-state = "Maharashtra"
-gender = "Male"
+import PyPDF2
+import fitz
 
-val1 = False
-val2 = False
-val3 = False
+class Selection1:
+    def __init__(self,sql,name):
+        self.val1=False
+        self.val2=False
+        self.val3=False
+        self.root = tk.Tk()
+        self.root.title("                                                                                                                                                                                                                      KYC Verifier")
+        self.root.resizable(0,0)
 
-def open_file():
+        width = 1366    
+        height = 768
+        self.root.geometry(f"{width}x{height}")
+
+        #title = Label(root, text="Aadhar Card - 1", font="Raleway 13 bold").grid(row=1, column=10, padx=625, pady=20)
+
+        #Enter you Aadhar Card E Letter
+        self.lbl = tk.Label(text="Enter you Aadhar Card E Letter", font= "gotham 13 bold")
+        self.lbl.grid(column=5, row=3)
+
+        #Button 1
+        self.browse_text = tk.StringVar()
+        self.browse_btn = tk.Button(self.root, textvariable=self.browse_text, command=lambda:self.open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=28)
+        self.browse_text.set("Chose file")
+        self.browse_btn.grid(column=5, row=2, padx=617, pady=320)
+
+        result=sql.read(name)
+        self.name=result[0]
+        self.email=result[1]
+        self.number=result[2]
+        self.dob=result[3]
+        self.pin=result[4]
+        self.state=result[5]
+        self.gender=result[6]
     
-    global a 
-    global b
-    browse_text.set("loading...")
-    file = askopenfile(parent=root, mode='rb', title="Choose a file", filetype=[("Pdf file", "*.pdf")])
+    def open_file(self):
+        self.browse_text.set("loading...")
+        self.file = askopenfile(parent=self.root, mode='rb', title="Choose a file", filetype=[("Pdf file", "*.pdf")])
+        if self.file:
+            read_pdf = PyPDF2.PdfFileReader(self.file)
+            page = read_pdf.getPage(0)
+            self.a = page.extractText()
+            self.b = read_pdf.documentInfo
+            self.browse_text.set(self.file)
+            times.sleep(1)
+            self.a1 = str()
+            self.a1 = self.a[self.a.index("future."):]
+            #print(a1)
+            self.browse_btn.destroy()
+            self.lbl.destroy()
+            self.convert()
+            self.validate1()
 
-    if file:
-        read_pdf = PyPDF2.PdfFileReader(file)
-        page = read_pdf.getPage(0)
-        a = page.extractText()
-        b = read_pdf.documentInfo
-        browse_text.set(file)
-        time.sleep(1)
-        #print(a)
-        #print(b)
-        a1 = str()
-        a1 = a[a.index("future."):]
-        #print(a1)
-        browse_btn.destroy()
-        lbl.destroy()
-
-        def convert():
+    def convert(self):
 
             '''doc = fitz.open(file)
             zoom = 2 # to increase the resolution
@@ -64,8 +74,7 @@ def open_file():
                 pix.writePNG(output)'''
 
 
-            import fitz
-            doc = fitz.open(file)
+            doc = fitz.open(self.file)
             for i in range(len(doc)):
                 for img in doc.getPageImageList(i):
                     xref = img[0]
@@ -78,43 +87,40 @@ def open_file():
                         pix1 = None
                     pix = None
 
-            val1 = True
-            
-        convert()
+            self.val1 = True
+    def validate1(self):
 
-        def validate1():
-
-            if (a.find(name) != -1) :
+            if (self.a.find(self.name) != -1) :
                 bolname = True
             else:
                 bolname = False
 
-            if (a.find(email) != -1) :
+            if (self.a.find(self.email) != -1) :
                 bolemail = True
             else:
                 bolemail = False
             
-            if (a.find(dob) != -1) :
+            if (self.a.find(self.dob) != -1) :
                 boldob = True
             else:
                 boldob = False
 
-            if (a.find(residense) != -1) :
+            if (self.a.find(self.residense) != -1) :
                 bolresidense = True
             else:
                 bolresidense = False
 
-            if (a.find(pin) != -1) :
+            if (self.a.find(self.pin) != -1) :
                 bolpin = True
             else:
                 bolpin = False
 
-            if (a.find(state) != -1) :
+            if (self.a.find(self.state) != -1) :
                 bolstate = True
             else:
                 bolstate = False
 
-            if (a.find(gender) != -1) :
+            if (self.a.find(self.gender) != -1) :
                 bolgender = True
             else:
                 bolgender = False
@@ -125,63 +131,30 @@ def open_file():
                 if element == True :
                     val1 = True
 
-            if (b.values() != -1) :
-                val2 = True
+            if (self.b.values() != -1) :
+                self.val2 = True
             else:
-                val2 = False
+                self.val2 = False
+            self.val1 = True
+    def validate2(self):
+        '''d = cv2.QRCodeDetector()
+        val, points, straight_qrcode = d.detectAndDecode(cv2.imread("D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\junk\\1.jpg"))
+        print(val)
+        print("yes")
 
-            '''def covert():
-                print("hello")'''
+        val3 = True'''
 
-            val1 = True
-        
-        validate1()
+    def gif(self):
+        print("hello")
+        if self.val1 == True and self.val2 == True and self.val3 == True:
+            giffy = Image.open("tick.gif") #Opens the Image
+            photo = ImageTk.PhotoImage(giffy) #Uses the ImagTk function from PIL, keep variable name as arguemnet.
 
-        def validate2():
-            '''d = cv2.QRCodeDetector()
-            val, points, straight_qrcode = d.detectAndDecode(cv2.imread("D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\junk\\1.jpg"))
-            print(val)
-            print("yes")
+            photo_label = tk.Label(image=photo) #Linking the photo in a Label to display it.
+            photo_label.pack #Packing the function above.
+        else:
+            giffy = Image.open("cross.gif") #Opens the Image
+            photo = ImageTk.PhotoImage(giffy) #Uses the ImagTk function from PIL, keep variable name as arguemnet.
 
-            val3 = True'''
-
-        validate2()
-
-        def gif():
-            print("hello")
-            if val1 == True and val2 == True and val3 == True:
-                giffy = Image.open("tick.gif") #Opens the Image
-                photo = ImageTk.PhotoImage(giffy) #Uses the ImagTk function from PIL, keep variable name as arguemnet.
-
-                photo_label = Label(image=photo) #Linking the photo in a Label to display it.
-                photo_label.pack #Packing the function above.
-            else:
-                giffy = Image.open("cross.gif") #Opens the Image
-                photo = ImageTk.PhotoImage(giffy) #Uses the ImagTk function from PIL, keep variable name as arguemnet.
-
-                photo_label = Label(image=photo) #Linking the photo in a Label to display it.
-                photo_label.pack #Packing the function above.
-
-
-root = Tk()
-root.title("                                                                                                                                                                                                                      KYC Verifier")
-root.resizable(0,0)
-
-width = 1366    
-height = 768
-root.geometry(f"{width}x{height}")
-
-#title = Label(root, text="Aadhar Card - 1", font="Raleway 13 bold").grid(row=1, column=10, padx=625, pady=20)
-
-#Enter you Aadhar Card E Letter
-lbl = Label(text="Enter you Aadhar Card E Letter", font= "gotham 13 bold")
-lbl.grid(column=5, row=3)
-
-#Button 1
-browse_text = StringVar()
-browse_btn = Button(root, textvariable=browse_text, command=lambda:open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=28)
-browse_text.set("Chose file")
-browse_btn.grid(column=5, row=2, padx=617, pady=320)
-
-
-root.mainloop()
+            photo_label = tk.Label(image=photo) #Linking the photo in a Label to display it.
+            photo_label.pack #Packing the function above.

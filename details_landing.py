@@ -2,26 +2,43 @@ from tkinter import *
 from typing import Sized
 from PIL import Image, ImageTk
 
-root = Tk()
-root.title("                                                                                                                                                                                                                 KYC Verifier")
-root.resizable(0, 0)
+from sqlhelp import SQLinitialize
+from selection1 import Selection1
 
 '''img = PhotoImage(file='ass.png') 
 root.iconphoto(False, img)
 '''
+def getval():
+    genderval = gendervalue.get()
+    nameval=namevalue.get()
+    emailval=emailvalue.get()
+    contactval=contactvalue.get()
+    dobval=dobvalue.get()
+    paymentval=paymentvalue.get()
+    pinval=pinvalue.get()
+    stateval=statevalue.get()
+    reg=sql.register(nameval,emailval,contactval,dobval,paymentval,pinval,stateval,genderval)
+    if(reg==True):
+        lbl = Label(root, text="Submitted!").grid(row=16, column=3, pady=10)
+        root.destroy()
+        Selection1(sql,nameval)
+        print("Submitted")
+    else:
+        lbl = Label(root, text=reg).grid(row=16, column=3, pady=10)
+        
 
+root = Tk()
+root.title("                                                                                                                                                                                                                 KYC Verifier")
+root.resizable(0, 0)
 canvas_width = 1366
 canvas_height = 768
-
 root.geometry(f"{canvas_width}x{canvas_height}")
+sql=SQLinitialize()
 
 Label(root, text="KYC Details", font="Raleway 13 bold", pady=15).grid(row=0, column=3)
 
-def getval():
-    print("Submitted")
-    lbl = Label(root, text="Submitted!").grid(row=16, column=3, pady=10)
-    genderval = gendervalue.get()
-    print(genderval)
+
+
 
 name = Label(root, text="   Enter Name")
 email = Label(root, text="   Enter Email")
@@ -86,18 +103,6 @@ pck.config(width=15,font=("Arial",10))
 pck.grid(row=8, column=3, padx=520)
 
 Button(text="Register", fg="black", command=getval,relief = RIDGE, activebackground="#9FDAF2", activeforeground = "#ffffff", width = 20,height=1).grid(row=15, column=3, pady=55)
-
-class SQLinitialize:
-    def __init__(self, name, email, contact, dob, residense):
-        self.name = namevalue
-        self.email = emailvalue
-        self.contact = contactvalue
-        self.dob = dobvalue
-        self.residense = residensevalue
-        self.pin = pinvalue
-        self.state = statevalue
-        self.gender = gendervalue
-        
 class documents:
     def __init__(self) -> None:
         pass
