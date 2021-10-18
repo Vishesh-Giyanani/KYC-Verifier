@@ -2,7 +2,7 @@ from tkinter import *
 from typing import Sized
 from PIL import Image, ImageTk
 import PyPDF2
-
+ 
 root = Tk()
  
 def home_button_press():

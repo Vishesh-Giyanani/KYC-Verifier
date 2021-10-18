@@ -4,7 +4,7 @@ from PIL import Image, ImageTk
 
 def home_button_press():
     print("hello") 
-
+ 
 root = Tk()
 root.title("                                                                                                                                                                                                                 KYC Verifier")
 root.resizable(0, 0)

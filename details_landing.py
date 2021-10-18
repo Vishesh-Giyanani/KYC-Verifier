@@ -23,8 +23,6 @@ def getval():
     genderval = gendervalue.get()
     print(genderval)
 
-
-
 name = Label(root, text="   Enter Name")
 email = Label(root, text="   Enter Email")
 contact = Label(root, text="   Contact Number")
@@ -86,8 +84,6 @@ gendervalue.set(list_gender[0])
 pck=OptionMenu(root,gendervalue,*list_gender)
 pck.config(width=15,font=("Arial",10))
 pck.grid(row=8, column=3, padx=520)
-
-
 
 Button(text="Register", fg="black", command=getval,relief = RIDGE, activebackground="#9FDAF2", activeforeground = "#ffffff", width = 20,height=1).grid(row=15, column=3, pady=55)
 
