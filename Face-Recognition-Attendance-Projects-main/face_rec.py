@@ -5,7 +5,7 @@ import os
 from datetime import datetime
 from PIL import ImageGrab
 
-path = 'Training_images'
+path = "D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\Face-Recognition-Attendance-Projects-main\\Training_images\\"
 images = []
 classNames = []
 myList = os.listdir(path)
