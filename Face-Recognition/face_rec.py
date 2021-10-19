@@ -10,6 +10,7 @@ import time
 cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 class FaceRecognition:
     def __init__(self):
+        self.face=False
         self.path = "D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\Face-Recognition\\Training_images\\"
         self.images = []
         self.classNames = []
@@ -47,11 +48,11 @@ class FaceRecognition:
                     cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
                     cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
                     print('Matched')
-                    face=True  
+                    self.face=True  
                     time.sleep(5)          
                     break
                     
-            if(face):
+            if(self.face):
                 cv2.destroyAllWindows()
                 break
             else:
