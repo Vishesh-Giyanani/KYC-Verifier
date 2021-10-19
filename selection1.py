@@ -18,10 +18,6 @@ class Selection1:
         width = 1366    
         height = 768
         self.root.geometry(f"{width}x{height}")
-
-        #title = Label(root, text="Aadhar Card - 1", font="Raleway 13 bold").grid(row=1, column=10, padx=625, pady=20)
-
-        #Enter you Aadhar Card E Letter
         self.lbl = tk.Label(text="Enter you Aadhar Card E Letter", font= "gotham 13 bold")
         self.lbl.grid(column=5, row=3)
 
@@ -125,17 +121,18 @@ class Selection1:
             else:
                 bolgender = False
             
-            bolarr = [bolname, boldob, bolgender, bolpin, bolstate, bolresidense]
+            bolarr = [bolname, bolemail, boldob, bolgender, bolpin, bolstate, bolresidense]
             
             for element in bolarr:
                 if element == True :
-                    val1 = True
+                    self.val1 = True
 
             if (self.b.values() != -1) :
                 self.val2 = True
             else:
                 self.val2 = False
             self.val1 = True
+            
     def validate2(self):
         '''d = cv2.QRCodeDetector()
         val, points, straight_qrcode = d.detectAndDecode(cv2.imread("D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\junk\\1.jpg"))
@@ -147,6 +144,7 @@ class Selection1:
     def gif(self):
         print("hello")
         if self.val1 == True and self.val2 == True and self.val3 == True:
+            
             giffy = Image.open("tick.gif") #Opens the Image
             photo = ImageTk.PhotoImage(giffy) #Uses the ImagTk function from PIL, keep variable name as arguemnet.
 
