@@ -42,7 +42,7 @@ class Selection1:
     
     def open_file(self):
         self.browse_text.set("loading...")
-        self.file = askopenfile(parent=self.root, mode='rb', title="Choose a file", filetype=[("Pdf file", "*.pdf")])
+        self.file = askopenfile(parent=self.root, mode='rb', title="Choose a file", filetypes=[('PDF Files','*.pdf')])
         if self.file:
             read_pdf = PyPDF2.PdfFileReader(self.file)
             page = read_pdf.getPage(0)
