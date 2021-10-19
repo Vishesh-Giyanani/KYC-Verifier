@@ -5,7 +5,7 @@ class SQLinitialize:
             host='localhost',
             user='root',
             # TODO: MAKE SURE TO CHECK PASSWORD
-            password='Nilay0309',
+            password='',
             database="KYC_Verifier",
         )
         

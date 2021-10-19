@@ -106,9 +106,7 @@ class DetailsLanding:
                 lbl = Label(self.root, text=reg).grid(row=16, column=3, pady=10)
         else:
             print("Mr. Stark i don't feel so good")
-            self.root.destroy()
-            Selection1(self.sql,nameval)
-            # lbl = Label(self.root, text=f"Field(s) is empty").grid(row=16, column=3, pady=10)
+            lbl = Label(self.root, text=f"Field(s) is empty").grid(row=16, column=3, pady=10)
             
 
     def checkNull(self,checker):

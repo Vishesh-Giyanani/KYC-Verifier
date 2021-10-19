@@ -1,13 +1,12 @@
 from tkinter import *
 from tkinter import font
 from PIL import Image, ImageTk
-
-from details_landing import DetailsLanding
+import details_landing
 
 def home_button_press():
-    print('Hello')
+    print("hello")
     root.destroy()
-    DetailsLanding()
+    details_landing.DetailsLanding()
  
 root = Tk()
 root.title("                                                                                                                                                                                                                 KYC Verifier")
@@ -19,7 +18,7 @@ b1.pack(side=BOTTOM, pady=204)
 
 '''img = PhotoImage(file='ass.png') 
 root.iconphoto(False, img)'''
-
+ 
 canvas_width = 1366
 canvas_height = 768
 

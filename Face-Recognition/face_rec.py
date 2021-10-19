@@ -4,10 +4,13 @@ import face_recognition
 import os
 from datetime import datetime
 from PIL import ImageGrab
+from os import times
+import time
 
-path = "D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\Face-Recognition-Attendance-Projects-main\\Training_images\\"
+path = "D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\Face-Recognition\\Training_images\\"
 images = []
 classNames = []
+face=False
 myList = os.listdir(path)
 print(myList)
 for cl in myList:
@@ -16,10 +19,8 @@ for cl in myList:
     classNames.append(os.path.splitext(cl)[0])
 print(classNames)
 
-
 def findEncodings(images):
     encodeList = []
-
 
     for img in images:
         img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -27,11 +28,10 @@ def findEncodings(images):
         encodeList.append(encode)
     return encodeList
 
-
 encodeListKnown = findEncodings(images)
 print('Encoding Complete')
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
 
 while True:
     success, img = cap.read()
@@ -56,6 +56,14 @@ while True:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 255, 0), 2)
             cv2.rectangle(img, (x1, y2 - 35), (x2, y2), (0, 255, 0), cv2.FILLED)
             cv2.putText(img, name, (x1 + 6, y2 - 6), cv2.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
-
-    cv2.imshow('Webcam', img)
-    cv2.waitKey(1)
+            print('Matched')
+            face=True  
+            time.sleep(5)          
+            break
+            
+    if(face):
+        cv2.destroyAllWindows()
+        break
+    else:
+        cv2.imshow('Webcam', img)
+        cv2.waitKey(1)
