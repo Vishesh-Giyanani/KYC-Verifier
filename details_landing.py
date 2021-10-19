@@ -37,9 +37,6 @@ sql=SQLinitialize()
 
 Label(root, text="KYC Details", font="Raleway 13 bold", pady=15).grid(row=0, column=3)
 
-
-
-
 name = Label(root, text="   Enter Name")
 email = Label(root, text="   Enter Email")
 contact = Label(root, text="   Contact Number")

@@ -4,7 +4,7 @@ class SQLinitialize:
         self.mydb=mysql.connector.connect(
             host='localhost',
             user='root',
-            password='Nilay0309',
+            password='',
             database="KYC_Verifier",
         )
         

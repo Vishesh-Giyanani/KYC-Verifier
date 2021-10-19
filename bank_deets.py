@@ -1,5 +1,6 @@
 from tkinter import *
 from typing import Sized
+import re 
 
 root = Tk()
 
@@ -23,7 +24,7 @@ ifsc.grid(row=3, column=2,  sticky=W)
 
 
 namevalue = StringVar()
-acc_numvalue = StringVar()
+acc_numvalue  = StringVar()
 ifscvalue = StringVar()
 
 
@@ -47,5 +48,33 @@ def panism():
 #Checkbox
 pancheck = Checkbutton (root, text="Do you own a Pan Card", variable=Checkbutton,command=panism, onvalue = 1, offvalue = 0, height = 4, width = 100, highlightcolor = "#A8F5EF")
 pancheck.grid(row = 8, column=3, pady=100)
+
+if namevalue:
+    Result=re.compile("[A-Za-z]{5}\d{4}[A-Za-z]{1}") 
+    namevalue = namevalue
+
+else:
+    print("nayo")
+
+if ifscvalue:
+    Result=re.compile("^[A-Z]{4}0[A-Z0-9]{6}$") 
+    ifscvalue = ifscvalue
+
+else:
+    print("nayo")
+
+if acc_numvalue:
+    Result=re.compile("[0-9]{9,18}") 
+    acc_numvalue = acc_numvalue
+
+else:
+    print("nayo")
+
+class init:
+    def __init__(self):
+        namevalue = self.namevalue
+        acc_numvalue = self.acc_numvalue
+        ifscentry = self.ifscentry
+
 
 root.mainloop()
