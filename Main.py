@@ -14,8 +14,8 @@ root.title("KYC Verifier")
 root.configure(bg = "#0CA418")
 root.resizable(0, 0)
 
-img = PhotoImage(file='ass.png') 
-root.iconphoto(False, img)
+# img = PhotoImage(file='ass.png') 
+# root.iconphoto(False, img)
 
 #Elements
 """text1 = Label(root, text="KYC      ", fg = "#0CA418", font="Gotham 120 bold", bg= "#ffffff").grid(row=4, column=1)

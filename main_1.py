@@ -2,8 +2,12 @@ from tkinter import *
 from tkinter import font
 from PIL import Image, ImageTk
 
+from details_landing import DetailsLanding
+
 def home_button_press():
-    print("hello")
+    print('Hello')
+    root.destroy()
+    DetailsLanding()
  
 root = Tk()
 root.title("                                                                                                                                                                                                                 KYC Verifier")
