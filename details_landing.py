@@ -1,5 +1,5 @@
 from tkinter import *
-
+import re
 from sqlhelp import SQLinitialize
 from selection1 import Selection1
 
@@ -93,7 +93,7 @@ class DetailsLanding:
         pinval=self.pinvalue.get()
         stateval=self.statevalue.get()
         checker=[genderval,nameval,emailval,contactval,dobval,residenceval,pinval,stateval]
-        if(self.checkNull(checker)):
+        if(self.checkNull(checker) and self.regexValidation(genderval,nameval,emailval,contactval,dobval,residenceval,pinval,stateval)):
             print('We good')
             reg=self.sql.loadDetails(nameval,emailval,contactval,dobval,residenceval,pinval,stateval,genderval)
             print(reg)
@@ -123,6 +123,35 @@ class DetailsLanding:
                 i+=1
                 pass
         return check
+    
+    def regexValidation(self,gender,name,email,contact,dob,residence,pin,state):
+        emailRegex = re.compile(r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b')
+        phoneRegex=re.compile(r'^\+91-?\d{4}-?\d{3}-?\d{3}$|^0?\d{4}-?\d{3}-?\d{3}$')
+        pinRegex=re.compile(r'^[1-9]{1}[0-9]{2}\\s{0, 1}[0-9]{3}$')
+        states=["Andhra Pradesh","Arunachal Pradesh ","Assam","Bihar","Chhattisgarh","Goa","Gujarat","Haryana","Himachal Pradesh","Jammu and Kashmir","Jharkhand","Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur","Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan","Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh","Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh","Dadra and Nagar Haveli","Daman and Diu","Lakshadweep","National Capital Territory of Delhi","Puducherry"]
+        emailVal=bool(re.match(emailRegex,email))
+        phoneVal=bool(re.match(phoneRegex,contact))
+        pinVal=re.match(pinRegex,pin)
+        stateVal=False
+        dobVal=False
+
+        if pinVal is None:
+            pinVal=True
+        else:
+            pinVal=False
+        if state in states:
+            stateVal=True
+        if(int(dob)<=2003):
+            dobVal=True
+        
+        if(emailVal and phoneVal and pinVal and stateVal and dobVal):
+            print('All is right with the world')
+            return True
+        else:
+            print('SATAN IS HERE')
+            return False
+
+        pass
 class documents:
     def __init__(self) -> None:
         pass

@@ -7,7 +7,6 @@ from account import CreateAccount
 class BankDetails:
     def __init__(self,name):
         self.nameSql=name
-        self.namevaluebool=False
         self.ifscvaluebool=False
         self.acc_numvaluebool=False
         self.root = Tk()
@@ -65,17 +64,10 @@ class BankDetails:
         ifsc=self.ifscvalue.get()
         accNum=self.acc_numvalue.get()
         if name!='':
-            Result=re.compile("[A-Za-z]{5}\d{4}[A-Za-z]{1}") 
-            self.namevaluebool = Result.search(name)
-            if(self.namevaluebool):
-                print('We good')
-            else:
-                self.lbl = Label(self.root, text="Something is wrong here").grid(row=1, column=4, pady=10)
-                print('But tony the name field has an error')
-            if(self.namevalue!=self.nameSql):
+            if(name!=self.nameSql):
+                print(f'{self.nameSql}\n{name}')
                 print('Wrong')
                 self.lbl = Label(self.root, text="Your account name doens't match the original name").grid(row=1, column=4, pady=10)
-
         else:
             self.lbl = Label(self.root, text="Name field empty").grid(row=10, column=3, pady=10)
             print("nayo")
@@ -83,9 +75,10 @@ class BankDetails:
 
         if ifsc!='':
             Result=re.compile("^[A-Z]{4}0[A-Z0-9]{6}$") 
-            self.ifscvaluebool = Result.search(ifsc)
+            self.ifscvaluebool = bool(re.match(Result,ifsc))
+            print(self.ifscvaluebool)
             if(self.ifscvaluebool):
-                print('We good')
+                print('IFSC We good')
             else:
                 self.lbl = Label(self.root, text="Something is wrong here").grid(row=2, column=4, pady=10)
                 print('But tony the ifsc field has an error')
@@ -97,9 +90,9 @@ class BankDetails:
         if accNum!='':
             self.lbl = Label(self.root, text="Account number field empty").grid(row=3, column=4, pady=10)
             Result=re.compile("[0-9]{9,18}") 
-            self.acc_numvaluebool = Result.search(accNum)
+            self.acc_numvaluebool = bool(re.match(Result,accNum))
             if(self.acc_numvaluebool):
-                print('We good')
+                print('Accno We good')
             else:
                 self.lbl = Label(self.root, text="Something is wrong here").grid(row=10, column=3, pady=10)
                 print('But tony the account number field has an error')
@@ -107,11 +100,15 @@ class BankDetails:
         else:
             print("nayo")
         
-        if(self.namevaluebool and self.ifscvaluebool and self.acc_numvaluebool):
+        print(f'{self.ifscvaluebool}\n{self.acc_numvaluebool}')
+        if( self.ifscvaluebool== True and self.acc_numvaluebool== True):
             print('WE ARE GOOD LOVES')
+            self.root.destroy()
             CreateAccount(name)
+        else:
+            print('Somethings wrong')
 
 # username password go to 
 if __name__=='__main__':
-    bd=BankDetails()
+    bd=BankDetails('Vishesh Bharat Giyanani')
     bd.root.mainloop()

@@ -45,10 +45,14 @@ class SQLinitialize:
         except Exception as e:
             return (f"Read:{e}")
     
-    def update(self,name,password):
+    def update(self,name,password,username):
         try:
+            print(type(password))
+            print(type(username))
+            print(type(name))
             self.mycursor=self.mydb.cursor()
             self.mycursor.execute(f"UPDATE kyc SET password='{password}' WHERE name='{name}'")
+            self.mycursor.execute(f"UPDATE kyc SET username ='{username}' WHERE name='{name}'")
             self.mydb.commit()
             return True
         except Exception as e:
@@ -56,4 +60,4 @@ class SQLinitialize:
 
 if __name__=='__main__':
     sql=SQLinitialize()
-    print(sql.read('Nilay Gaitonde'))
+    print(sql.update('Nilay Nitish Gaitonde','pass123','NilayG'))
