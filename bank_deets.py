@@ -1,9 +1,12 @@
 from tkinter import *
-import re 
+import re
+
+from account import CreateAccount 
 
 
 class BankDetails:
-    def __init__(self):
+    def __init__(self,name):
+        self.nameSql=name
         self.namevaluebool=False
         self.ifscvaluebool=False
         self.acc_numvaluebool=False
@@ -18,10 +21,10 @@ class BankDetails:
 
         Label(self.root, text="Bank Account Details", font="Raleway 13 bold", pady=30,padx = 100).grid(row=0, column=3,)
 
-        name = Label(self.root, text="   Enter Account Holder Name")
-        acc_num = Label(self.root, text="   Enter Account Number")
-        ifsc = Label(self.root, text="   Enter IFSC Code")
-
+        name = Label(self.root, text="   Enter Account Holder Name:")
+        acc_num = Label(self.root, text="   Enter Account Number:")
+        ifsc = Label(self.root, text="   Enter IFSC Code:")
+ 
 
         name.grid(row=1, column=2,  sticky=W)
         acc_num.grid(row=2, column=2,  sticky=W)
@@ -69,6 +72,10 @@ class BankDetails:
             else:
                 self.lbl = Label(self.root, text="Something is wrong here").grid(row=1, column=4, pady=10)
                 print('But tony the name field has an error')
+            if(self.namevalue!=self.nameSql):
+                print('Wrong')
+                self.lbl = Label(self.root, text="Your account name doens't match the original name").grid(row=1, column=4, pady=10)
+
         else:
             self.lbl = Label(self.root, text="Name field empty").grid(row=10, column=3, pady=10)
             print("nayo")
@@ -99,6 +106,10 @@ class BankDetails:
 
         else:
             print("nayo")
+        
+        if(self.namevaluebool and self.ifscvaluebool and self.acc_numvaluebool):
+            print('WE ARE GOOD LOVES')
+            CreateAccount(name)
 
 # username password go to 
 if __name__=='__main__':

@@ -7,7 +7,7 @@ from datetime import datetime
 from PIL import ImageGrab
 from os import times
 import time
-def faceRecog():
+def faceRecog(name):
     path = "D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\Face-Recognition\\Training_images\\"
     images = []
     classNames = []
@@ -63,7 +63,7 @@ def faceRecog():
                 
         if(face):
             cv2.destroyAllWindows()
-            BankDetails()
+            BankDetails(name)
             break
         else:
             cv2.imshow('Webcam', img)

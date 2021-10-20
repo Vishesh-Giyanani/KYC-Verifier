@@ -1,6 +1,4 @@
 from tkinter import *
-from tkinter import font
-from PIL import Image, ImageTk
 import details_landing
 
 def home_button_press():

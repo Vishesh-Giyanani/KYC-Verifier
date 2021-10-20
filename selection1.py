@@ -3,7 +3,7 @@ import time
 import tkinter as tk
 import sys
 sys.path.insert(0,'Face-Recognition/face_rec.py')
-import face_rec
+# import face_rec
 from tkinter.filedialog import askopenfile
 from PIL import Image, ImageTk
 
@@ -155,7 +155,7 @@ class Selection1:
             photo_label = tk.Label(image=photo) #Linking the photo in a Label to display it.
             photo_label.pack #Packing the function above.
             time.sleep(10)
-            face_rec.faceRecog()
+            # face_rec.faceRecog(self.name)
         else:
             giffy = Image.open("cross.gif") #Opens the Image
             photo = ImageTk.PhotoImage(giffy) #Uses the ImagTk function from PIL, keep variable name as arguemnet.
