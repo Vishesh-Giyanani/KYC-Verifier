@@ -96,12 +96,15 @@ class DetailsLanding:
         checker=[genderval,nameval,emailval,contactval,dobval,paymentval,pinval,stateval]
         if(self.checkNull(checker)):
             print('We good')
-            reg=self.sql.register(nameval,emailval,contactval,dobval,paymentval,pinval,stateval,genderval)
+            reg=self.sql.loadDetails(nameval,emailval,contactval,dobval,paymentval,pinval,stateval,genderval)
+            print(reg)
             if(reg==True):
+                print('True')
                 lbl = Label(self.root, text="Submitted!").grid(row=16, column=3, pady=10)
+                print('Destroying')
                 self.root.destroy()
-                Selection1(self.sql,nameval)
                 print("Submitted")
+                Selection1(self.sql,nameval)
             else:
                 lbl = Label(self.root, text=reg).grid(row=16, column=3, pady=10)
         else:
