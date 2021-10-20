@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from bank_deets import BankDetails
 import face_recognition
 import os
 from datetime import datetime
@@ -62,6 +63,7 @@ def faceRecog():
                 
         if(face):
             cv2.destroyAllWindows()
+            BankDetails()
             break
         else:
             cv2.imshow('Webcam', img)
