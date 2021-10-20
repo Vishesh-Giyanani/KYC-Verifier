@@ -21,8 +21,8 @@ class SQLinitialize:
             self.state = state
             self.gender = gender
             self.mycursor=self.mydb.cursor()
-            query="INSERT INTO kyc (name,email,contact,dob,pin,state,gender) VALUES (%s,%s,%s,%s,%s,%s,%s)"
-            values=(f"{self.name}",f"{self.email}",f"{self.contact}",f"{self.dob}",f"{self.pin}",f"{self.state}",f"{self.gender}")
+            query="INSERT INTO kyc (name,email,contact,dob,residence,pin,state,gender) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+            values=(f"{self.name}",f"{self.email}",f"{self.contact}",f"{self.dob}",f"{self.residense}",f"{self.pin}",f"{self.state}",f"{self.gender}")
             print(query,values)
             self.mycursor.execute(query,values)
             print('Executed')

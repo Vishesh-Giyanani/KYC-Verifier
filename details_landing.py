@@ -19,7 +19,7 @@ class DetailsLanding:
 
         Label(self.root, text="KYC Details", font="Raleway 13 bold", pady=15).grid(row=0, column=3)
 
-        name = Label(self.root, text="   Enter Name")
+        name = Label(self.root, text="   Enter Full Name (include your middle name)")
         email = Label(self.root, text="   Enter Email")
         contact = Label(self.root, text="   Contact Number")
         dob = Label(self.root, text="   Enter Birth Year")
@@ -89,14 +89,13 @@ class DetailsLanding:
         emailval=self.emailvalue.get()
         contactval=self.contactvalue.get()
         dobval=self.dobvalue.get()
-        # paymentval=self.paymentvalue.get()
-        paymentval='1200'
+        residenceval=self.residensevalue.get()
         pinval=self.pinvalue.get()
         stateval=self.statevalue.get()
-        checker=[genderval,nameval,emailval,contactval,dobval,paymentval,pinval,stateval]
+        checker=[genderval,nameval,emailval,contactval,dobval,residenceval,pinval,stateval]
         if(self.checkNull(checker)):
             print('We good')
-            reg=self.sql.loadDetails(nameval,emailval,contactval,dobval,paymentval,pinval,stateval,genderval)
+            reg=self.sql.loadDetails(nameval,emailval,contactval,dobval,residenceval,pinval,stateval,genderval)
             print(reg)
             if(reg==True):
                 print('True')
