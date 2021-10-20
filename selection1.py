@@ -1,7 +1,8 @@
-from os import times
 import time
 import tkinter as tk
 import sys
+
+from sqlhelp import SQLinitialize
 sys.path.insert(0,'Face-Recognition/face_rec.py')
 # import face_rec
 from tkinter.filedialog import askopenfile
@@ -49,7 +50,7 @@ class Selection1:
             self.a = page.extractText()
             self.b = read_pdf.documentInfo
             self.browse_text.set(self.file)
-            times.sleep(1)
+            time.sleep(1)
             self.a1 = str()
             self.a1 = self.a[self.a.index("future."):]
             #print(a1)
@@ -162,3 +163,7 @@ class Selection1:
 
             photo_label = tk.Label(image=photo) #Linking the photo in a Label to display it.
             photo_label.pack #Packing the function above.
+if __name__=='__main__':
+    sql=SQLinitialize()
+    sel=Selection1(sql,'Nilay Gaitonde')
+    sel.root.mainloop()
