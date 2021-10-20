@@ -10,6 +10,7 @@ import time
 def faceRecog(name):
     path = "D:\\Files\College\\Sem V\\Programming Laboratry - II\\Project\\Face-Recognition\\Training_images\\"
     images = []
+    # hello world
     classNames = []
     face=False
     myList = os.listdir(path)
