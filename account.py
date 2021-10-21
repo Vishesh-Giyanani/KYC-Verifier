@@ -1,6 +1,4 @@
 import tkinter as tk
-from cv2 import recoverPose
-import mysql.connector
 
 from sqlhelp import SQLinitialize
 
@@ -15,7 +13,7 @@ class CreateAccount:
         canvas_height = 768
         self.root.geometry(f"{canvas_width}x{canvas_height}")
 
-        tk.Label(self.root, text="Your account", font="Raleway 13 bold", pady=30,padx = 100).grid(row=0, column=3,)
+        tk.Label(self.root, text="You have succesfully completed your input process fill in your login details so we can verofy you next time\nYour account", font="Raleway 13 bold", pady=30,padx = 100).grid(row=0, column=3,)
         
         self.userNameLabel=tk.Label(self.root,text="Enter username:")
         self.passwordLabel=tk.Label(self.root,text="Enter password:")
@@ -33,7 +31,7 @@ class CreateAccount:
         self.lbl = tk.Label(self.root, text="").grid(row=10, column=3, pady=10)
 
     def validate(self):
-        up=self.sql.update(self.name,self.passwordEntry.get())
+        up=self.sql.update(self.name,self.passwordEntry.get(),self.userNameEntry.get())
         if(up==True):
             print('We good')
         else:

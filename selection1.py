@@ -1,7 +1,8 @@
-from os import times
 import time
 import tkinter as tk
 import sys
+
+from sqlhelp import SQLinitialize
 sys.path.insert(0,'Face-Recognition/face_rec.py')
 # import face_rec
 from tkinter.filedialog import askopenfile
@@ -14,7 +15,8 @@ class Selection1:
     def __init__(self,sql,name):
         self.val1=False
         self.val2=False
-        self.val3=False
+        self.val3=True
+        self.tampered=True
         self.root = tk.Tk()
         self.root.title("                                                                                                                                                                                                                      KYC Verifier")
         self.root.resizable(0,0)
@@ -32,13 +34,15 @@ class Selection1:
         self.browse_btn.grid(column=5, row=2, padx=617, pady=320)
 
         result=sql.read(name)
+        print(result)
         self.name=result[0]
-        self.email=result[1]
-        self.number=result[2]
-        self.dob=result[3]
-        self.pin=result[4]
-        self.state=result[5]
-        self.gender=result[6]
+        self.email=result[2]
+        self.number=result[3]
+        self.dob=result[4]
+        self.residence=result[5]
+        self.pin=result[6]
+        self.state=result[7]
+        self.gender=result[8]
     
     def open_file(self):
         self.browse_text.set("loading...")
@@ -49,14 +53,24 @@ class Selection1:
             self.a = page.extractText()
             self.b = read_pdf.documentInfo
             self.browse_text.set(self.file)
-            times.sleep(1)
+            time.sleep(1)
             self.a1 = str()
             self.a1 = self.a[self.a.index("future."):]
-            #print(a1)
+            # print(self.b)
+            for i in self.b.values():
+                # if(type(i) is int):
+                if(type(i) is PyPDF2.generic.IndirectObject):
+                    self.tampered=False
+                else:
+                    self.tampered=True
+                    print(i)
+                    print(type(i))
+                    break
             self.browse_btn.destroy()
             self.lbl.destroy()
             self.convert()
             self.validate1()
+            self.gif()
 
     def convert(self):
 
@@ -74,7 +88,7 @@ class Selection1:
                 pix.writePNG(output)'''
 
 
-            doc = fitz.open(self.file)
+            doc = fitz.open(self.file.name)
             for i in range(len(doc)):
                 for img in doc.getPageImageList(i):
                     xref = img[0]
@@ -94,18 +108,13 @@ class Selection1:
                 bolname = True
             else:
                 bolname = False
-
-            if (self.a.find(self.email) != -1) :
-                bolemail = True
-            else:
-                bolemail = False
             
             if (self.a.find(self.dob) != -1) :
                 boldob = True
             else:
                 boldob = False
 
-            if (self.a.find(self.residense) != -1) :
+            if (self.a.find(self.residence) != -1) :
                 bolresidense = True
             else:
                 bolresidense = False
@@ -125,10 +134,12 @@ class Selection1:
             else:
                 bolgender = False
             
-            bolarr = [bolname, bolemail, boldob, bolgender, bolpin, bolstate, bolresidense]
+            bolarr = [bolname, boldob, bolgender, bolpin, bolstate, bolresidense]
             
             for element in bolarr:
+                i=0
                 if element == True :
+                    print('LOVE YOU ALL')
                     self.val1 = True
 
             if (self.b.values() != -1) :
@@ -143,12 +154,12 @@ class Selection1:
         print(val)
         print("yes")
 
-        val3 = True'''
+        self.val3 = True'''
 
     def gif(self):
         print("hello")
-        if self.val1 == True and self.val2 == True and self.val3 == True:
-            
+        if self.val1 == True and self.val2 == True and self.val3 == True and self.tampered == False:
+            print('We are good to go')
             giffy = Image.open("tick.gif") #Opens the Image
             photo = ImageTk.PhotoImage(giffy) #Uses the ImagTk function from PIL, keep variable name as arguemnet.
 
@@ -162,3 +173,7 @@ class Selection1:
 
             photo_label = tk.Label(image=photo) #Linking the photo in a Label to display it.
             photo_label.pack #Packing the function above.
+if __name__=='__main__':
+    sql=SQLinitialize()
+    sel=Selection1(sql,'Vishesh Bharat Giyanani')
+    sel.root.mainloop()
